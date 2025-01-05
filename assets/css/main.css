@@ -1,6 +1,26 @@
+<<<<<<< HEAD
 @import "tailwindcss";
 @plugin "daisyui";
 
 html{
     scroll-behavior: smooth;
 }
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+    .full-center {
+        @apply flex items-center justify-center;
+    }
+}
+
+.links {
+    @apply block p-3 text-white font-bold no-underline hover:bg-main duration-200;
+}
+
+html {
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+}
+>>>>>>> 5121bd4 (first commit)

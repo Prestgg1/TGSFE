@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <footer class="bg-black text-white py-10 w-full flex flex-col items-center">
       <div class="container border-y border-gray-600 py-4 flex flex-wrap justify-between gap-10 text-center lg:text-left">
         <!-- Company Info -->
@@ -86,3 +87,7 @@
   /* Additional custom styling can go here */
   </style>
   
+=======
+    <footer><h1 class="text-3xl font-bold underline">Footer</h1></footer>
+</template>
+>>>>>>> 5121bd4 (first commit)
