@@ -2,6 +2,7 @@
     <Home />
     <About />
     <Slider />
+    <Services />
 </template>
 
 <style>
