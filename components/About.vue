@@ -1,5 +1,6 @@
 <template>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <section class="bg-second flex flex-col items-center text-white py-10" id="about">
         <!-- Container -->
         <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10 px-6">
@@ -13,6 +14,9 @@
                         <span class="text-lg">{{ feature }}</span>
 =======
     <section class="bg-second full-center text-white py-10">
+=======
+    <section class="bg-second full-center flex-col text-white py-10">
+>>>>>>> 69fdb7f (Services Section Added and Footer Component Upgraded)
         <!-- Container -->
         <div
             class="container mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 px-4"
@@ -54,6 +58,7 @@
             </div>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         <!-- Kartlar Bölümü -->
         <div class="container p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
@@ -69,6 +74,25 @@
         </div>
 =======
 >>>>>>> 5121bd4 (first commit)
+=======
+        <div class="flex container p-6 space-x-4">
+            <div
+                v-for="kart in karts"
+                :key="kart.id"
+                class="flex-1 p-6 shadow-md hover:bg-qirmizi duration-300 group transition"
+            >
+                <h2
+                    class="text-4xl text-red-500 font-bold mb-2 duration-300 group-hover:text-white"
+                >
+                    0{{ kart.id }}
+                </h2>
+                <h3 class="text-xl font-semibold mb-2">{{ kart.title }}</h3>
+                <p>
+                    {{ kart.desc }}
+                </p>
+            </div>
+        </div>
+>>>>>>> 69fdb7f (Services Section Added and Footer Component Upgraded)
     </section>
 </template>
 
@@ -81,6 +105,9 @@ const features = [
     "Free Membership Card",
 ];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 69fdb7f (Services Section Added and Footer Component Upgraded)
 const karts = [
     {
         id: 1,
@@ -89,6 +116,7 @@ const karts = [
     },
     {
         id: 2,
+<<<<<<< HEAD
         title: "Career Development",
         desc: "We help young professionals build their careers with expert guidance",
     },
@@ -96,6 +124,15 @@ const karts = [
         id: 3,
         title: "Exclusive Resources",
         desc: "Members get access to premium educational materials and tools",
+=======
+        title: "Free Online Courses",
+        desc: "We conduct online courses in various fields for young students",
+    },
+    {
+        id: 3,
+        title: "Free Online Courses",
+        desc: "We conduct online courses in various fields for young students",
+>>>>>>> 69fdb7f (Services Section Added and Footer Component Upgraded)
     },
 ];
 </script>
