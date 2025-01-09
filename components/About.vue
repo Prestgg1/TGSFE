@@ -1,6 +1,7 @@
 <template>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <section class="bg-second flex flex-col items-center text-white py-10" id="about">
         <!-- Container -->
         <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center gap-10 px-6">
@@ -17,6 +18,9 @@
 =======
     <section class="bg-second full-center flex-col text-white py-10">
 >>>>>>> 69fdb7f (Services Section Added and Footer Component Upgraded)
+=======
+    <section class="bg-second full-center flex-col text-white py-10" id="about">
+>>>>>>> 7eb107d (Teams Section and Login Page Added)
         <!-- Container -->
         <div
             class="container mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 px-4"

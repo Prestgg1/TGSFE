@@ -1,5 +1,6 @@
 <template>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <section class="py-16 bg-gray-900 w-screen" id="services">
       <div class="container mx-auto text-center px-6">
         <!-- Başlık -->
@@ -77,6 +78,9 @@
   
 =======
     <section class="bg-primary py-16">
+=======
+    <section class="bg-second py-16" id="services">
+>>>>>>> 7eb107d (Teams Section and Login Page Added)
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold text-white mb-4">SERVICES</h2>
             <p class="text-gray-300 text-lg mb-12">Meet Our Services</p>

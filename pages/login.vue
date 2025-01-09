@@ -1,82 +1,41 @@
-<script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useRuntimeConfig } from '#imports';
-const token = useCookie('token')
+<script setup lang="ts">
+import { z } from "zod";
+import type { FormSubmitEvent } from "#ui/types";
 
-const { API_URL } = useRuntimeConfig().public;
-const email = ref('');
-const password = ref('');
-const router = useRouter();
+const schema = z.object({
+    email: z.string().email("Invalid email"),
+    password: z.string().min(8, "Must be at least 8 characters"),
+});
 
-async function onSubmit(event) {  event.preventDefault();
+type Schema = z.infer<typeof schema>;
+const state = reactive({
+    email: undefined,
+    password: undefined,
+});
 
-  try {
-    const response = await $fetch(`${API_URL}user/login`, {
-      method: 'POST',
-      body: {
-        email: email.value,
-        password: password.value
-      }
-    });
-
-    token.value = response.token;
-    router.push('/');
-  } catch (error) {
-    console.error('API Error:', error);
-  } 
-};
-
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+    // Do something with data
+    console.log(event.data);
+}
 </script>
 
 <template>
-  <div class="flex items-center justify-center w-full min-h-screen bg-gray-900">
-    <form
-      @submit="onSubmit"
-      class="space-y-4 bg-gray-800 p-6 rounded-xl w-full sm:w-96"
-    >
-      <!-- Email Input -->
-      <div class="form-control">
-        <label for="email" class="label my-2 text-white">
-          <span class="label-text">Email</span>
-        </label>
-        <input
-          class="input validator input-bordered w-full text-white bg-gray-700 border-gray-600"
-          type="email"
-          v-model="email"
-          required
-          placeholder="mail@site.com"
-        />
-        <div class="validator-hint">Enter valid email address</div>
-      </div>
+    <div class="full-center w-full flex-1">
+        <UForm
+            :schema="schema"
+            :state="state"
+            class="space-y-4 bg-second p-5 w-1/4 rounded-xl flex-col"
+            @submit="onSubmit"
+        >
+            <UFormGroup label="Email" name="email">
+                <UInput v-model="state.email" />
+            </UFormGroup>
 
-      <!-- Password Input -->
-      <div class="form-control">
-        <label for="password" class="label my-2 text-white">
-          <span class="label-text">Password</span>
-        </label>
-        <input
-          id="password"
-          type="password"
-          class="input validator input-bordered w-full text-white bg-gray-700 border-gray-600"
-          v-model="password"
-          required
-          placeholder="Enter your password"
-        />
-        <div class="validator-hint">Enter valid password</div>
-      </div>
+            <UFormGroup label="Password" name="password">
+                <UInput v-model="state.password" type="password" />
+            </UFormGroup>
 
-      <!-- Submit Button -->
-      <button
-        type="submit"
-        class="btn btn-red w-full text-white hover:bg-red-600 focus:outline-none"
-      >
-        Submit
-      </button>
-    </form>
-  </div>
+            <UButton type="submit" class="w-full full-center"> Submit </UButton>
+        </UForm>
+    </div>
 </template>
-
-<style scoped>
-/* Additional custom styling can go here */
-</style>

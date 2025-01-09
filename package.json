@@ -1,5 +1,19 @@
 {
   "name": "nuxt-app",
+<<<<<<< HEAD
+=======
+  "dependencies": {
+    "@nuxt/image": "1.8.1",
+    "@nuxt/ui": "2.20.0",
+    "@nuxtjs/tailwindcss": "6.12.2",
+    "@splidejs/vue-splide": "^0.6.12",
+    "consola": "^3.3.3",
+    "nuxt": "^3.15.0",
+    "vue": "latest",
+    "vue-router": "latest",
+    "zod": "^3.24.1"
+  },
+>>>>>>> 7eb107d (Teams Section and Login Page Added)
   "private": true,
   "type": "module",
   "scripts": {
