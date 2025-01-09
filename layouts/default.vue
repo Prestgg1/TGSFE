@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col min-h-tam justify-center items-center">
+    <div class="flex flex-col min-h-tam bg-auth justify-center items-center">
         <Header />
         <main class="flex flex-col w-full flex-1 h-full">
             <NuxtPage />

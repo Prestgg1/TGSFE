@@ -1,13 +1,13 @@
 <script setup>
 const routes = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/#about" },
-    { name: "Services", path: "/#services" },
-    { name: "Pricing", path: "/#pricing" },
-    { name: "Team", path: "/#team" },
-    { name: "Contact", path: "/#contact" },
-    { name: "News", path: "/#news" },
-    { name: "Events", path: "/#events" },
+    { name: "About", path: "#about" },
+    { name: "Services", path: "#services" },
+    { name: "Pricing", path: "#pricing" },
+    { name: "Team", path: "#team" },
+    { name: "Contact", path: "#contact" },
+    { name: "News", path: "#news" },
+    { name: "Events", path: "#events" },
 ];
 </script>
 <template>

@@ -15,6 +15,7 @@ export default <Partial<Config>>{
     extend: {
       colors: {
         qirmizi: "#E94141",
+        auth: "#121212",
         second: "#0C0C0C",
         green: {
           50: "#EFFDF5",

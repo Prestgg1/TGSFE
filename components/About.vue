@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-second full-center flex-col text-white py-10">
+    <section class="bg-second full-center flex-col text-white py-10" id="about">
         <!-- Container -->
         <div
             class="container mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 px-4"

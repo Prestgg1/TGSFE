@@ -3,6 +3,7 @@
     <About />
     <Slider />
     <Services />
+    <Teams />
 </template>
 
 <style>
