@@ -1,9 +1,15 @@
 <template>
-    <Home />
-    <About />
-    <Slider />
-    <Services />
-    <Teams />
+    <Home data-aos="fade-up" />
+    <About data-aos="fade-up" />
+    <Slider data-aos="fade-up" />
+    <div class="w-full h-full full-center bg-second">
+        <div class="container">
+            <Services data-aos="fade-up" />
+            <Pricing />
+            <Teams data-aos="fade-up" />
+            <Contact data-aos="fade-up" />
+        </div>
+    </div>
 </template>
 
 <style>

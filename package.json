@@ -9,6 +9,7 @@
     "@splidejs/vue-splide": "^0.6.12",
     "consola": "^3.3.3",
     "nuxt": "^3.15.0",
+    "nuxt-aos": "^1.2.5",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.24.1"
@@ -38,9 +39,14 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "daisyui": "^5.0.0-beta.8"
+=======
+    "@iconify-json/fa6-solid": "^1.2.3",
+    "nuxt-booster": "^3.1.9"
+>>>>>>> 012726b (Api Inteqrated)
   }
 }

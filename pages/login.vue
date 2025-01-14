@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
+import { API_URLS } from "~/constants/api";
 
 const schema = z.object({
     email: z.string().email("Invalid email"),
@@ -14,8 +15,18 @@ const state = reactive({
 });
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-    // Do something with data
-    console.log(event.data);
+    try {
+        const response = await $fetch(
+            `${API_URLS.BASE_URL}${API_URLS.AUTH.LOGIN}`,
+            {
+                method: "POST",
+                body: event.data,
+            },
+        );
+        console.log("API Response:", response);
+    } catch (error) {
+        console.error("API Error:", error);
+    }
 }
 </script>
 

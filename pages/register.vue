@@ -1,131 +1,72 @@
-<script setup >
-import { useRuntimeConfig } from '#imports';
-const { API_URL } = useRuntimeConfig().public;
-definePageMeta({
-  middleware: ['logger']
-});
-
+<script setup lang="ts">
 import { z } from "zod";
+import type { FormSubmitEvent } from "#ui/types";
+import { API_URLS } from "~/constants/api";
 
 const schema = z.object({
-  name: z.string().min(2, "İsim en az 2 karakter olmalıdır"),
-  surname: z.string().min(2, "Soyisim en az 2 karakter olmalıdır"),
-  email: z.string().email("Geçerli bir email adresi giriniz"),
-  phone: z.number().int("Telefon numarası sadece rakam içermelidir"),
-  password: z.string().min(8, "Şifre en az 8 karakter olmalıdır"),
+    name: z.string().min(2, "İsim en az 2 karakter olmalıdır"),
+    surname: z.string().min(2, "Soyisim en az 2 karakter olmalıdır"),
+    email: z.string().email("Geçerli bir email adresi giriniz"),
+    phone: z.number().int("Telefon numarası sadece rakam içermelidir"),
+    password: z.string().min(8, "Şifre en az 8 karakter olmalıdır"),
 });
 
+type Schema = z.infer<typeof schema>;
 const state = reactive({
-  name: undefined,
-  surname: undefined,
-  email: undefined,
-  phone: undefined,
-  password: undefined,
+    name: undefined,
+    surname: undefined,
+    email: undefined,
+    phone: undefined,
+    password: undefined,
 });
 
-async function onSubmit(event) {
-  try {
-    const response = await $fetch(
-      `${API_URL}user/create`,
-      {
-        method: "POST",
-        body: event,
-      },
-    );
-    console.log("API Response:", response);
-  } catch (error) {
-    console.error("API Error:", error);
-  };
-};
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+    try {
+        const response = await $fetch(
+            `${API_URLS.BASE_URL}${API_URLS.AUTH.REGISTER}`,
+            {
+                method: "POST",
+                body: event.data,
+            },
+        );
+        console.log("API Response:", response);
+    } catch (error) {
+        console.error("API Error:", error);
+    }
+}
 </script>
 
 <template>
-  <div class="flex items-center justify-center w-full min-h-screen bg-gray-900">
-    <form
-      @submit="onSubmit"
-      class="space-y-6 bg-gray-800 p-6 rounded-xl w-full sm:w-96"
-    >
-      <!-- Name Input -->
-      <div class="form-control">
-        <label for="name" class="label text-white">
-          <span class="label-text">İsim</span>
-        </label>
-        <input
-          id="name"
-          type="text"
-          v-model="state.name"
-          class="input input-bordered w-full text-white bg-gray-700 border-gray-600"
-          placeholder="İsminizi girin"
-        />
-      </div>
+    <div class="full-center w-full flex-1">
+        <UForm
+            :schema="schema"
+            :state="state"
+            class="space-y-4 bg-second p-5 w-1/4 rounded-xl flex-col"
+            @submit="onSubmit"
+        >
+            <UFormGroup label="Name" name="name">
+                <UInput v-model="state.name" />
+            </UFormGroup>
 
-      <!-- Surname Input -->
-      <div class="form-control">
-        <label for="surname" class="label text-white">
-          <span class="label-text">Soyisim</span>
-        </label>
-        <input
-          id="surname"
-          type="text"
-          v-model="state.surname"
-          class="input input-bordered w-full text-white bg-gray-700 border-gray-600"
-          placeholder="Soyadınızı girin"
-        />
-      </div>
+            <UFormGroup label="Surname" name="surname">
+                <UInput v-model="state.surname" />
+            </UFormGroup>
 
-      <!-- Email Input -->
-      <div class="form-control">
-        <label for="email" class="label text-white">
-          <span class="label-text">Email</span>
-        </label>
-        <input
-          id="email"
-          type="email"
-          v-model="state.email"
-          class="input input-bordered w-full text-white bg-gray-700 border-gray-600"
-          placeholder="Email adresinizi girin"
-        />
-      </div>
+            <UFormGroup label="Email" name="email">
+                <UInput v-model="state.email" type="email" />
+            </UFormGroup>
 
-      <!-- Phone Input -->
-      <div class="form-control">
-        <label for="phone" class="label text-white">
-          <span class="label-text">Telefon</span>
-        </label>
-        <input
-          id="phone"
-          type="number"
-          v-model="state.phone"
-          class="input input-bordered w-full text-white bg-gray-700 border-gray-600"
-          placeholder="Telefon numaranızı girin"
-        />
-      </div>
+            <UFormGroup label="Phone" name="phone">
+                <UInput v-model="state.phone" type="number" />
+            </UFormGroup>
 
-      <!-- Password Input -->
-      <div class="form-control">
-        <label for="password" class="label text-white">
-          <span class="label-text">Şifre</span>
-        </label>
-        <input
-          id="password"
-          type="password"
-          v-model="state.password"
-          class="input input-bordered w-full text-white bg-gray-700 border-gray-600"
-          placeholder="Şifrenizi girin"
-        />
-      </div>
+            <UFormGroup label="Password" name="password">
+                <UInput v-model="state.password" type="password" />
+            </UFormGroup>
 
-      <!-- Submit Button -->
-      <button
-        type="submit"
-        class="btn btn-red w-full text-white hover:bg-red-600 focus:outline-none"
-      >
-        Kayıt Ol
-      </button>
-    </form>
-  </div>
+            <UButton type="submit" class="w-full full-center"> 
+                Kayıt Ol 
+            </UButton>
+        </UForm>
+    </div>
 </template>
-
-<style scoped>
-/* Additional custom styling can go here */
-</style>

@@ -6,8 +6,12 @@
 =======
     <section id="home" class="relative full-center text-white h-screen w-full">
         <!-- Arka plan resmi -->
+<<<<<<< HEAD
         <nuxt-img
 >>>>>>> 5121bd4 (first commit)
+=======
+        <NuxtImg
+>>>>>>> 012726b (Api Inteqrated)
             src="/images/home-bg.jpg"
             class="absolute inset-0 w-full h-full pointer-events-none object-cover -z-10"
             alt="Home Background"

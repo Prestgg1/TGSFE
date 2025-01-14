@@ -63,6 +63,7 @@
         </div>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         <!-- Kartlar Bölümü -->
         <div class="container p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
@@ -80,6 +81,9 @@
 >>>>>>> 5121bd4 (first commit)
 =======
         <div class="flex container p-6 space-x-4">
+=======
+        <div class="flex container p-6 space-x-4 flex-wrap">
+>>>>>>> 012726b (Api Inteqrated)
             <div
                 v-for="kart in karts"
                 :key="kart.id"

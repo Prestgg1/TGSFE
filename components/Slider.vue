@@ -11,6 +11,9 @@ const options = {
     autoplay: true,
     perPage: 4,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 012726b (Api Inteqrated)
     breakpoints: {
         1200: { perPage: 4, gap: "1rem" },
         1000: { perPage: 2, gap: "0.5rem" },
