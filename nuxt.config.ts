@@ -5,13 +5,21 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   ssr: true,
-  ui: {},
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_URL,
+    },
+  },
+  ui: {
+    global: true,
+  },
 
   modules: [
     "@nuxt/ui",
     "@nuxtjs/tailwindcss",
     "@nuxt/image",
     "nuxt-booster",
+    "nuxt-aos",
   ],
   css: ["~/assets/css/main.css"],
   image: {

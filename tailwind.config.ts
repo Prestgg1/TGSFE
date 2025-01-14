@@ -12,6 +12,16 @@ export default <Partial<Config>>{
     "./error.vue",
   ],
   theme: {
+    container: {
+      center: true,
+      screens: {
+        sm: "600px",
+        md: "728px",
+        lg: "984px",
+        xl: "1040px",
+        "2xl": "1280px",
+      },
+    },
     extend: {
       colors: {
         qirmizi: "#E94141",

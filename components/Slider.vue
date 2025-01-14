@@ -6,6 +6,11 @@ const options = {
     gap: "1rem",
     autoplay: true,
     perPage: 4,
+    breakpoints: {
+        1200: { perPage: 4, gap: "1rem" },
+        1000: { perPage: 2, gap: "0.5rem" },
+        400: { perPage: 1, gap: 0 },
+    },
 };
 const images = [
     "/images/slider/1.png",

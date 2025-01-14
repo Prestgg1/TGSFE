@@ -1,7 +1,7 @@
 <template>
     <section id="home" class="relative full-center text-white h-screen w-full">
         <!-- Arka plan resmi -->
-        <nuxt-img
+        <NuxtImg
             src="/images/home-bg.jpg"
             class="absolute inset-0 w-full h-full pointer-events-none object-cover -z-10"
             alt="Home Background"

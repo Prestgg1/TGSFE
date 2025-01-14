@@ -32,7 +32,7 @@
                 />
             </div>
         </div>
-        <div class="flex container p-6 space-x-4">
+        <div class="flex container p-6 space-x-4 flex-wrap">
             <div
                 v-for="kart in karts"
                 :key="kart.id"

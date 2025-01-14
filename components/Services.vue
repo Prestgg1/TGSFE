@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-second py-16" id="services">
+    <section class="py-16" id="services">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold text-white mb-4">SERVICES</h2>
             <p class="text-gray-300 text-lg mb-12">Meet Our Services</p>
@@ -12,7 +12,7 @@
                     <div
                         class="text-red-500 text-4xl mb-4 group-hover:bg-white p-4 w-max transition duration-300"
                     >
-                        <i :class="service.icon"></i>
+                        <UIcon :name="service.icon" class="w-10 h-10" />
                     </div>
                     <h3 class="text-xl font-semibold mb-2">
                         {{ service.title }}
@@ -34,34 +34,34 @@ const services = [
         title: "Online Courses",
         description:
             "We conduct online courses in various fields for young students.",
-        icon: "fas fa-book",
+        icon: "fa6-solid:book",
     },
     {
         title: "Free Tours",
         description:
             "We organize free domestic and foreign trips for young people.",
-        icon: "fas fa-users",
+        icon: "fa6-solid:users",
     },
     {
         title: "Free Certificates",
         description:
             "At the end of each online course, we provide a certificate to the young people.",
-        icon: "fas fa-certificate",
+        icon: "fa6-solid:certificate",
     },
     {
         title: "Free Online Library",
         description: "Access for more than 1000+ books.",
-        icon: "fas fa-book-open",
+        icon: "fa6-solid:book-open",
     },
     {
         title: "Career Development",
         description: "Free access to more than 100+ global competitions.",
-        icon: "fas fa-briefcase",
+        icon: "fa6-solid:briefcase",
     },
     {
         title: "Movie Nights",
         description: "Every month 3 free movie nights.",
-        icon: "fas fa-film",
+        icon: "fa6-solid:film",
     },
 ];
 </script>
