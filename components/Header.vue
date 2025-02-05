@@ -143,7 +143,7 @@ const routes = [
     { name: "Pricing", path: "#pricing" },
     { name: "Team", path: "#team" },
     { name: "Contact", path: "#contact" },
-    { name: "News", path: "#news" },
+    { name: "News", path: "news" },
     { name: "Events", path: "#events" },
 ];
 const isOpen = ref(false);

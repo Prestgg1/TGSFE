@@ -1,24 +1,33 @@
-// middleware/logger.ts
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  // Token kontrolü
-  const token = useCookie<string | undefined>("token");
+export default defineNuxtRouteMiddleware((to, from) => {
+  console.log(`Navigating from ${from.path} to ${to.path}`);
+  console.log('Route meta:', to.meta);
+  console.log('Query parameters:', to.query);
+  const token = useCookie('token');
 
-  const user: any = useState("user", () => null);
-  if (user.value) {
-    return;
+  if (!token.value) {
+    console.log('No token found, redirecting to login...');
+    return navigateTo('/login');
   }
 
-  try {
-    const response = await $fetch<{ name: string }[]>(
-      `https://tgsapideploy-jjeo.shuttle.app/api/get/users/token/${token.value}`,
-    );
 
-    if (response[0].name !== "") {
-      user.value = response[0];
-    }
-  } catch (error) {
-    console.error("Error checking login status:", error);
-    token.value = undefined;
-    return navigateTo("/login");
-  }
-});
+
+
+  /* 
+      const checkLoginStatus = async () => {
+          try {
+              const response = await $fetch(`https://tgsapideploy-jjeo.shuttle.app/api/get/users/token/${token.value}`);
+              if (!response.isLoggedIn) {
+                  console.log('Token is invalid or user is not logged in, redirecting to login...');
+                  return navigateTo('/login');
+              }
+          } catch (error) {
+              console.error('Error checking login status:', error);
+              return navigateTo('/login');
+          }
+      };
+  
+      checkLoginStatus();
+       */
+
+  return;
+}); 

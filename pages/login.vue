@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+    middleware: ['logger']
+});
+const token = useCookie('token')
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 import { API_URLS } from "~/constants/api";
@@ -16,20 +20,20 @@ const state = reactive({
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
     try {
-        const response = await $fetch(
+        const response: { token: string } = await $fetch(
             `${API_URLS.BASE_URL}${API_URLS.AUTH.LOGIN}`,
             {
                 method: "POST",
                 body: event.data,
             },
         );
-        console.log("API Response:", response);
+        token.value = response.token;
+        navigateTo("/");
     } catch (error) {
         console.error("API Error:", error);
     }
 }
 </script>
-
 <template>
     <div class="full-center w-full flex-1">
         <UForm

@@ -9,9 +9,18 @@
         <Footer />
     </div>
 </template>
+
 <style>
 section {
     scroll-margin-top: 250px;
 }
 </style>
+<<<<<<< HEAD
 >>>>>>> 7eb107d (Teams Section and Login Page Added)
+=======
+<script setup>
+definePageMeta({
+    middleware: ['guest']
+})
+</script>
+>>>>>>> 794993a (News)

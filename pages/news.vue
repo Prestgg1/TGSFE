@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { API_URLS } from "~/utils/api";
+import { API_URLS } from "~/constants/api";
 import { ref, onMounted } from "vue";
 
 const data = ref<any[]>([]);

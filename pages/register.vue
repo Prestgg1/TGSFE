@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+    middleware: ['logger']
+});
+
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 import { API_URLS } from "~/constants/api";

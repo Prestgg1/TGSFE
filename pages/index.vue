@@ -32,3 +32,8 @@ main *::selection {
     color: #000;
 }
 </style>
+<script setup>
+definePageMeta({
+    middleware: ['auth']
+})
+</script>

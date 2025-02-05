@@ -52,7 +52,7 @@ const images = [
     <div class="w-full bg-white full-center">
         <div class="text-black container">
             <Splide :options="options" aria-label="My Favorite Images">
-                <SplideSlide v-for="image in images">
+                <SplideSlide v-for="image in images" class="grayscale hover:grayscale-0 transition-all duration-300">
                     <NuxtImg :src="image" sizes="250" />
 >>>>>>> 5121bd4 (first commit)
                 </SplideSlide>
