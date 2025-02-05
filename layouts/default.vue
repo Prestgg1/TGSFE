@@ -7,8 +7,14 @@
         <Footer />
     </div>
 </template>
+
 <style>
 section {
     scroll-margin-top: 250px;
 }
 </style>
+<script setup>
+definePageMeta({
+    middleware: ['guest']
+})
+</script>

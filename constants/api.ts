@@ -3,5 +3,6 @@ export const API_URLS = {
     AUTH: {
         LOGIN: '/user/login',
         REGISTER: '/user/create'
-    }
+    },
+    NEWS:"https://tgsapideploy-jjeo.shuttle.app/api/get/news"
 } as const 
