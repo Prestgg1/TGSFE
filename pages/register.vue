@@ -4,36 +4,36 @@ definePageMeta({
 });
 
 import { z } from "zod";
-import type { FormSubmitEvent } from "#ui/types";
 import { API_URLS } from "~/constants/api";
 
 const schema = z.object({
-    name: z.string().min(2, "İsim en az 2 karakter olmalıdır"),
-    surname: z.string().min(2, "Soyisim en az 2 karakter olmalıdır"),
-    email: z.string().email("Geçerli bir email adresi giriniz"),
-    phone: z.number().int("Telefon numarası sadece rakam içermelidir"),
-    password: z.string().min(8, "Şifre en az 8 karakter olmalıdır"),
+    name: z.string().min(2, "Name must be at least 2 characters"),
+    surname: z.string().min(2, "Surname must be at least 2 characters"),
+    email: z.string().email("Invalid email address"),
+    phone: z.string().min(10, "Phone number must be at least 10 characters"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 type Schema = z.infer<typeof schema>;
 const state = reactive({
-    name: undefined,
-    surname: undefined,
-    email: undefined,
-    phone: undefined,
-    password: undefined,
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    password: "",
 });
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+async function onSubmit(event:any) {
     try {
         const response = await $fetch(
             `${API_URLS.BASE_URL}${API_URLS.AUTH.REGISTER}`,
             {
                 method: "POST",
-                body: event.data,
+                body: event.target as unknown as Schema,
             },
         );
         console.log("API Response:", response);
+        navigateTo("/login");
     } catch (error) {
         console.error("API Error:", error);
     }
@@ -41,36 +41,74 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-    <div class="full-center w-full flex-1">
-        <UForm
-            :schema="schema"
-            :state="state"
-            class="space-y-4 bg-second p-5 w-1/4 rounded-xl flex-col"
-            @submit="onSubmit"
+    <div class="flex justify-center items-center min-h-screen bg-black">
+        <form
+            @submit.prevent="onSubmit"
+            class="bg-gray-900 p-8 rounded-xl shadow-md w-full max-w-md border border-gray-700 hover:border-red-600 transition-all duration-300"
         >
-            <UFormGroup label="Name" name="name">
-                <UInput v-model="state.name" />
-            </UFormGroup>
+            <h2 class="text-center text-2xl font-semibold text-red-500 mb-6">Sign Up</h2>
 
-            <UFormGroup label="Surname" name="surname">
-                <UInput v-model="state.surname" />
-            </UFormGroup>
+            <div class="mb-4">
+                <label class="block text-gray-400 mb-1" for="name">Name</label>
+                <input
+                    id="name"
+                    v-model="state.name"
+                    type="text"
+                    required
+                    class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-red-500 outline-none transition"
+                />
+            </div>
 
-            <UFormGroup label="Email" name="email">
-                <UInput v-model="state.email" type="email" />
-            </UFormGroup>
+            <div class="mb-4">
+                <label class="block text-gray-400 mb-1" for="surname">Surname</label>
+                <input
+                    id="surname"
+                    v-model="state.surname"
+                    type="text"
+                    required
+                    class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-red-500 outline-none transition"
+                />
+            </div>
 
-            <UFormGroup label="Phone" name="phone">
-                <UInput v-model="state.phone" type="number" />
-            </UFormGroup>
+            <div class="mb-4">
+                <label class="block text-gray-400 mb-1" for="email">Email</label>
+                <input
+                    id="email"
+                    v-model="state.email"
+                    type="email"
+                    required
+                    class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-red-500 outline-none transition"
+                />
+            </div>
 
-            <UFormGroup label="Password" name="password">
-                <UInput v-model="state.password" type="password" />
-            </UFormGroup>
+            <div class="mb-4">
+                <label class="block text-gray-400 mb-1" for="phone">Phone</label>
+                <input
+                    id="phone"
+                    v-model="state.phone"
+                    type="tel"
+                    required
+                    class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-red-500 outline-none transition"
+                />
+            </div>
 
-            <UButton type="submit" class="w-full full-center"> 
-                Kayıt Ol 
-            </UButton>
-        </UForm>
+            <div class="mb-6">
+                <label class="block text-gray-400 mb-1" for="password">Password</label>
+                <input
+                    id="password"
+                    v-model="state.password"
+                    type="password"
+                    required
+                    class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-red-500 outline-none transition"
+                />
+            </div>
+
+            <button
+                type="submit"
+                class="w-full py-2 rounded-md bg-red-600 hover:bg-red-700 text-white font-semibold transition-all"
+            >
+                Sign Up
+            </button>
+        </form>
     </div>
 </template>

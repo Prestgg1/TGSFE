@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup >
 definePageMeta({
     middleware: ['logger']
 });
-const token = useCookie('token')
+
+const token = useCookie('token');
 import { z } from "zod";
-import type { FormSubmitEvent } from "#ui/types";
 import { API_URLS } from "~/constants/api";
 
 const schema = z.object({
@@ -12,15 +12,14 @@ const schema = z.object({
     password: z.string().min(8, "Must be at least 8 characters"),
 });
 
-type Schema = z.infer<typeof schema>;
 const state = reactive({
-    email: undefined,
-    password: undefined,
+    email: "",
+    password: "",
 });
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+async function onSubmit(event) {
     try {
-        const response: { token: string } = await $fetch(
+        const response= await $fetch(
             `${API_URLS.BASE_URL}${API_URLS.AUTH.LOGIN}`,
             {
                 method: "POST",
@@ -34,23 +33,43 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     }
 }
 </script>
+
 <template>
-    <div class="full-center w-full flex-1">
-        <UForm
-            :schema="schema"
-            :state="state"
-            class="space-y-4 bg-second p-5 w-1/4 rounded-xl flex-col"
-            @submit="onSubmit"
+    <div class="flex justify-center items-center min-h-screen bg-black">
+        <form
+            @submit.prevent="onSubmit"
+            class="bg-gray-900 p-8 rounded-xl shadow-md w-full max-w-md border border-gray-700 hover:border-red-600 transition-all duration-300"
         >
-            <UFormGroup label="Email" name="email">
-                <UInput v-model="state.email" />
-            </UFormGroup>
+            <h2 class="text-center text-2xl font-semibold text-red-500 mb-6">Login</h2>
 
-            <UFormGroup label="Password" name="password">
-                <UInput v-model="state.password" type="password" />
-            </UFormGroup>
+            <div class="mb-4">
+                <label class="block text-gray-400 mb-1" for="email">Email</label>
+                <input
+                    id="email"
+                    v-model="state.email"
+                    type="email"
+                    required
+                    class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-red-500 outline-none transition"
+                />
+            </div>
 
-            <UButton type="submit" class="w-full full-center"> Submit </UButton>
-        </UForm>
+            <div class="mb-6">
+                <label class="block text-gray-400 mb-1" for="password">Password</label>
+                <input
+                    id="password"
+                    v-model="state.password"
+                    type="password"
+                    required
+                    class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-red-500 outline-none transition"
+                />
+            </div>
+
+            <button
+                type="submit"
+                class="w-full py-2 rounded-md bg-red-600 hover:bg-red-700 text-white font-semibold transition-all"
+            >
+                Submit
+            </button>
+        </form>
     </div>
 </template>
