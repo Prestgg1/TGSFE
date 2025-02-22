@@ -1,21 +1,10 @@
 <script setup>
 import { NuxtLink } from '#components';
-import { useCookie } from '#imports';
+const token = useCookie("token");
 
-const token = useCookie('token');
 
-// Kullanıcı giriş durumu
-const isLogin = ref(false); // Başlangıçta giriş yapılmamış
-const userName = ref('');
-
-// Kullanıcı verisini localStorage'dan kontrol et
-onMounted(() => {
-    const userData = JSON.parse(localStorage.getItem('user')); // localStorage'dan kullanıcı bilgisi alınır
-    if (userData) {
-        isLogin.value = true;
-        userName.value = userData.name; // Kullanıcı adı alınır
-    }
-});
+const user = useState('user', () => null);
+console.log(user.value);
 
 const routes = [
     { name: "Home", path: "/" },
@@ -29,15 +18,8 @@ const routes = [
 ];
 
 const handleLoginLogout = () => {
-    if (isLogin.value) {
-        // Çıkış yap
-        localStorage.removeItem('user'); // localStorage'dan kullanıcı bilgisi silinir
-        token.value = undefined;
-        isLogin.value = false;
-        userName.value = ''; // Kullanıcı adı sıfırlanır
-    } else {
-        isLogin.value = true;
-    }
+    token.value = null;
+    user.value = null;
 };
 </script>
 
@@ -59,21 +41,21 @@ const handleLoginLogout = () => {
 
                 <!-- Profil veya Login/Register Linki -->
                 <div class="flex items-center gap-4">
-                    <button v-if="!isLogin" @click="handleLoginLogout" class="btn btn-outline btn-red-500">
+                    <NuxtLink v-if="!user" to="/login" class="btn btn-outline btn-red-500">
                         Login
-                    </button>
-                    <button v-if="!isLogin" @click="handleLoginLogout" class="btn btn-outline btn-red-500">
+                    </NuxtLink>
+                    <NuxtLink v-if="!user" to="/register" class="btn btn-outline btn-red-500">
                         Register
-                    </button>
-                    <div v-if="isLogin" class="dropdown dropdown-end">
+                    </NuxtLink>
+                    <div v-if="user" class="dropdown dropdown-end">
                         <label tabindex="0" class="btn btn-outline btn-red-500 ">
-                            {{ userName }}
+                            {{ user?.name }}
                         </label>
                         <ul
                             tabindex="0"
                             class="menu dropdown-content bg-gray-800 text-white rounded-box w-52"
                         >
-                            <li><NuxtLink to="/profile">Mənim Profilim</NuxtLink></li>
+                            <li><NuxtLink to="/dashboard">Mənim Profilim</NuxtLink></li>
                             <li><button @click="handleLoginLogout">Çıxış</button></li>
                         </ul>
                     </div>
@@ -108,19 +90,19 @@ const handleLoginLogout = () => {
                             </template>
 
                             <!-- Profil veya Login/Register Linki (Mobile) -->
-                            <li v-if="!isLogin" class="space-y-2">
-                                <button @click="handleLoginLogout" class="btn btn-outline btn-red-500 w-full">
+                           <li v-if="!user" class="space-y-2">
+                                <NuxtLink to="/login" class="btn btn-outline btn-red-500 w-full">
                                     Login
-                                </button>
-                                <button @click="handleLoginLogout" class="btn btn-outline btn-red-500 w-full">
+                                </NuxtLink>
+                                <NuxtLink to="/register" class="btn btn-outline btn-red-500 w-full">
                                     Register
-                                </button>
+                                </NuxtLink>
                             </li>
-                            <li v-if="isLogin" class="space-y-2">
+                            <li v-if="user" class="space-y-2">
                                 <button @click="handleLoginLogout" class="btn btn-outline btn-red-500 w-full">
                                     Logout
                                 </button>
-                            </li>
+                            </li> 
                         </ul>
                     </div>
                 </div>

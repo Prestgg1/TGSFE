@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      API_URL: process.env.NUXT_PUBLIC_API_URL,
+      apiBase: process.env.NUXT_PUBLIC_API_URL,
     },
   },
   fontawesome: {

@@ -1,11 +1,11 @@
 <script setup >
-definePageMeta({
-    middleware: ['logger']
-});
-
 const token = useCookie('token');
+
+definePageMeta({
+    middleware: ['guest']
+}); 
+
 import { z } from "zod";
-import { API_URLS } from "~/constants/api";
 
 const schema = z.object({
     email: z.string().email("Invalid email"),
@@ -20,10 +20,13 @@ const state = reactive({
 async function onSubmit(event) {
     try {
         const response= await $fetch(
-            `${API_URLS.BASE_URL}${API_URLS.AUTH.LOGIN}`,
+            `${baseURL}/user/login`,
             {
+                headers:{
+                    'Content-Type': 'application/json',
+                },
                 method: "POST",
-                body: event.data,
+                body: JSON.stringify(state),
             },
         );
         token.value = response.token;

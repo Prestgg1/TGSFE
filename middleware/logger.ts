@@ -1,33 +1,19 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  console.log(`Navigating from ${from.path} to ${to.path}`);
-  console.log('Route meta:', to.meta);
-  console.log('Query parameters:', to.query);
-  const token = useCookie('token');
+import { UserFetcher } from "@/utils/api";
 
-  if (!token.value) {
-    console.log('No token found, redirecting to login...');
-    return navigateTo('/login');
-  }
+export default defineNuxtRouteMiddleware(async (to, from) => {
+    const token = useCookie("token");
+    const user = useState<any>("user", () => null);
 
-
-
-
-  /* 
-      const checkLoginStatus = async () => {
-          try {
-              const response = await $fetch(`https://tgsapideploy-jjeo.shuttle.app/api/get/users/token/${token.value}`);
-              if (!response.isLoggedIn) {
-                  console.log('Token is invalid or user is not logged in, redirecting to login...');
-                  return navigateTo('/login');
-              }
-          } catch (error) {
-              console.error('Error checking login status:', error);
-              return navigateTo('/login');
-          }
-      };
-  
-      checkLoginStatus();
-       */
-
-  return;
-}); 
+    if (!token.value || !user.value) {
+        try {
+            const response: any = await UserFetcher(
+                "https://tgsapideploy-jjeo.shuttle.app/api/get/users/token"
+            );
+            user.value = response[0];
+        } catch (error) {
+            token.value = null;
+            user.value = null;
+            console.log(error);
+        }
+    }
+});

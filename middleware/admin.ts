@@ -1,12 +1,28 @@
+import { UserFetcher } from "@/utils/api";
+
 export default defineNuxtRouteMiddleware(async (to, from) => {
-    const token = useCookie('token')
+    const token = useCookie("token");
+    const user = useState<any>("user", () => null);
 
     if (!token.value) {
-        return navigateTo('/login')
+        return abortNavigation({
+            statusCode: 403,
+            message: 'You have no access to this page!'
+        });
     }
-    const { data }: any = await useFetch('https://tgsapideploy-jjeo.shuttle.app/api/get/users/token/' + token.value)
+    try {
+        const response: any = await UserFetcher(
+            "https://tgsapideploy-jjeo.shuttle.app/api/get/users/token"
+        );
 
-    if (data.value[0].duty != "admin") {
-        return navigateTo('/403')
+        user.value = response[0];
+        if (user.value?.duty !== "admin") {
+            return abortNavigation({
+                statusCode: 403,
+                message: 'You have no access to this page!'
+            });
+        }
+    } catch (error) {
+        return navigateTo("/login");
     }
-})
+});

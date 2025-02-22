@@ -1,10 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-    middleware: ['logger']
+    middleware: ['guest']
 });
 
 import { z } from "zod";
-import { API_URLS } from "~/constants/api";
 
 const schema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -14,7 +13,6 @@ const schema = z.object({
     password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
-type Schema = z.infer<typeof schema>;
 const state = reactive({
     name: "",
     surname: "",
@@ -23,13 +21,17 @@ const state = reactive({
     password: "",
 });
 
-async function onSubmit(event:any) {
+async function onSubmit() {
     try {
+        console.log(state)
         const response = await $fetch(
-            `${API_URLS.BASE_URL}${API_URLS.AUTH.REGISTER}`,
+            `${baseURL}/user/create`,
             {
+                headers:{
+                    'Content-Type': 'application/json',
+                },
                 method: "POST",
-                body: event.target as unknown as Schema,
+                body: JSON.stringify(state),
             },
         );
         console.log("API Response:", response);

@@ -14,7 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { API_URLS } from "~/constants/api";
+definePageMeta({
+  middleware:['logger']
+})
 import { ref, onMounted } from "vue";
 
 const data = ref<any[]>([]);
@@ -23,7 +25,9 @@ const isLoading = ref(false);
 async function fetcher() {
   try {
     isLoading.value = true;
-    data.value = await $fetch(API_URLS.NEWS);
+    data.value = await $fetch(
+      "https://tgsapideploy-jjeo.shuttle.app/api/get/news");
+      console.log(data.value)
   } catch (error) {
     console.error("Error fetching news:", error);
   } finally {
