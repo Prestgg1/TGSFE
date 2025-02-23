@@ -29,8 +29,11 @@ async function onSubmit(event) {
                 body: JSON.stringify(state),
             },
         );
-        token.value = response.token;
-        navigateTo("/");
+        console.log(response)
+        if(response.token){
+            token.value = response.token;
+            navigateTo("/");
+        }
     } catch (error) {
         console.error("API Error:", error);
     }

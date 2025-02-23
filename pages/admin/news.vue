@@ -35,11 +35,11 @@ async function addNews() {
     await $fetch("https://tgsapideploy-jjeo.shuttle.app/api/news/upload", {
       method: "POST",
       body: {
-        file: src.value,
+        linkpath: src.value,
         name: newNews.value.title,
         description: newNews.value.content
       },
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token.value}` },
     });
 
     newsList.value.unshift({
@@ -67,6 +67,7 @@ async function addNews() {
         @success="onUploadSuccess"
         @error="onUploadError"
       >
+      {{ src }}
         <NuxtImg
           v-if="!src"
           @click="open"
@@ -80,7 +81,7 @@ async function addNews() {
           :src="src"
           @click="src = null"
           alt="Uploaded Image"
-          class="shadow-md w-80 h-80 rounded-full border-4 border-white grayscale"
+          class="shadow-md w-80 h-80 rounded-xl mx-auto border-4 border-white grayscale"
         />
       </CldUploadWidget>
 

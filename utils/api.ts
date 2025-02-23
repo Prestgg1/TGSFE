@@ -1,10 +1,11 @@
-
 export function UserFetcher(url: string) {
+    const token = useCookie('token');
+    console.log(token.value)
     const request = $fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${useCookie('token').value}`
+            Authorization: `Bearer ${token.value}`
         }
     })
     return request

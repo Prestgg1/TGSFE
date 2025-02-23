@@ -26,7 +26,7 @@ const handleLoginLogout = () => {
 <template>
     <header class="bg-dark p-4 w-full sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-red-500 text-3xl font-bold">TGS</h1>
+            <NuxtLink to="/" class="text-red-500 text-3xl font-bold">TGS</NuxtLink>
 
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex gap-6 justify-center items-center">

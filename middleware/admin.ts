@@ -23,6 +23,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             });
         }
     } catch (error) {
-        return navigateTo("/login");
+        return abortNavigation({
+            statusCode: 403,
+            message: 'You have no access to this page!'
+        });
     }
 });

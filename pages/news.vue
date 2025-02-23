@@ -19,13 +19,13 @@ definePageMeta({
 })
 import { ref, onMounted } from "vue";
 
-const data = ref<any[]>([]);
+const data = ref([]);
 const isLoading = ref(false);
 
 async function fetcher() {
   try {
     isLoading.value = true;
-    data.value = await $fetch(
+    data.value = await UserFetcher(
       "https://tgsapideploy-jjeo.shuttle.app/api/get/news");
       console.log(data.value)
   } catch (error) {
